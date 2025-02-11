@@ -1,0 +1,19 @@
+name: Run Kite AI Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # This cron expression means it will run at the start of every hour
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: npm start
+      env:
+        USAGE_REPORT_URL: ${{ secrets.USAGE_REPORT_URL }} # This line is optional, use if you have an API endpoint to report usage
